@@ -30,7 +30,7 @@ import simpleaudio as sa
 # -------------------------
 # Config loader
 # -------------------------
-DEFAULT_CONFIG_PATH = os.path.expanduser("~/.config/extraskillsage/config.json")
+DEFAULT_CONFIG_PATH = os.path.expanduser("~/ExtraSkillSage/config.json")
 CONFIG_PATH = os.getenv("SAGE_CONFIG_PATH", DEFAULT_CONFIG_PATH)
 
 def _load_config(path: str) -> dict:
@@ -340,7 +340,6 @@ def summarize_after_prefix(line: str) -> str:
             f"文: {body}\n"
             "要約:"
         )
-    )
 
     try:
         out = ollama_generate(OLLAMA_MODEL, prompt, host=OLLAMA_HOST, port=OLLAMA_PORT)
@@ -432,7 +431,6 @@ def main() -> int:
     last_summary = time.time()
 
     start_line = "報告。監視を開始します。"
-    start_line = summarize_after_prefix(start_line)
     print(start_line, flush=True)
     tts_speak(start_line)
 
@@ -505,7 +503,6 @@ if __name__ == "__main__":
         raise SystemExit(main())
     except KeyboardInterrupt:
         end_line = "報告。監視を終了します。"
-        end_line = summarize_after_prefix(end_line)
         print(end_line, flush=True)
         tts_speak(end_line)
         raise
